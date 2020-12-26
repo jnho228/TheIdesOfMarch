@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public GameDifficulty gameDifficulty;
     public GameObject daggerObject;
 
     private Animator anim;
+    private AudioSource audioSource;
 
     private float daggerThrowTimer = 1f;
     private float daggerThrowDelay = 1f;
@@ -20,6 +22,7 @@ public class EnemyController : MonoBehaviour
     {
         myTransform = transform;
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -46,10 +49,16 @@ public class EnemyController : MonoBehaviour
         // Dagger spawn timer
         if (daggerThrowTimer < Time.deltaTime)
         {
-            DaggerController dc = Instantiate(daggerObject, myTransform.position, Quaternion.identity).GetComponent<DaggerController>();
-            dc.SetMoveAngle(Random.Range(0, 360));
-            dc.SetMoveSpeed(Random.Range(2.5f, 3.5f));
+            int spawnAmount = Random.Range(1, gameDifficulty.Difficulty + 1);
 
+            for (int i = 0; i < spawnAmount; i++)
+            {
+                DaggerController dc = Instantiate(daggerObject, myTransform.position, Quaternion.identity).GetComponent<DaggerController>();
+                dc.SetMoveAngle(Random.Range(0, 360));
+                dc.SetMoveSpeed(Random.Range(2.5f, 3.5f));
+            }
+
+            audioSource.Play();
             daggerThrowTimer = daggerThrowDelay + Random.Range(-0.3f, 0.3f);
         }
         else

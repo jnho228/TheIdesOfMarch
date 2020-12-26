@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour
     public LayerMask collisionLayerMask;
 
     private Transform myTransform;
+    private AudioSource audioSource;
     private int stabCount = 0;
     private bool isAlive = true;
 
     void Awake()
     {
         myTransform = transform;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -59,6 +61,8 @@ public class PlayerController : MonoBehaviour
     {
         gameGUI.AddStab();
         stabCount++;
+
+        audioSource.Play();
 
         if (stabCount >= 23)
             GameOver();

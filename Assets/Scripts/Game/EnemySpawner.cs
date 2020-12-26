@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public GameDifficulty gameDifficulty;
+
     public GameObject enemyObject;
     public GameObject daggerObject;
 
     private bool isActive = true;
+
     private float spawnTimer = 1f;
     private float spawnDelay = 5f;
+    private float spawnIncreaseTimer = 5f;
+    private float spawnIncreaseDelay = 10f;
+    private int spawnRateLevel = 0;
 
-    private float difficultyIncreaseTimer = 15f;
-    private float difficultyIncreaseDelay = 15f;
-    private int difficultyLevel = 0;
+    private float gameDifficultyIncreaseTimer = 60f;
+    private float gameDifficultyIncreaseDelay = 60f;
 
     void Start()
     {
@@ -63,24 +68,32 @@ public class EnemySpawner : MonoBehaviour
                 newEnemy.SetMoveSpeed(Random.Range(1f, 4f));
             }
 
-            spawnTimer = spawnDelay - (difficultyLevel * 0.5f);
+            spawnTimer = spawnDelay - (spawnRateLevel * 0.5f);
 
-            if (spawnTimer < 0.5f) // Hard limit so it's not... too hard, ya'know?
-                spawnTimer = 0.5f;
+            if (spawnTimer < 0.2f) // Fuck that let's make it hard
+                spawnTimer = 0.2f;
         }
         else
             spawnTimer -= Time.deltaTime;
 
         // Difficulty Increase
-        if (difficultyIncreaseTimer < Time.deltaTime)
+        if (spawnIncreaseTimer < Time.deltaTime)
         {
             // I think with each difficulty bump I wanna spawn some sort of super enemy lol
 
-            difficultyLevel++;
-            difficultyIncreaseTimer = difficultyIncreaseDelay;
+            spawnRateLevel++;
+            spawnIncreaseTimer = spawnIncreaseDelay;
         }
         else
-            difficultyIncreaseTimer -= Time.deltaTime;
+            spawnIncreaseTimer -= Time.deltaTime;
+
+        if (gameDifficultyIncreaseTimer < Time.deltaTime)
+        {
+            gameDifficulty.Difficulty++;
+            gameDifficultyIncreaseTimer = gameDifficultyIncreaseDelay;
+        }
+        else
+            gameDifficultyIncreaseTimer -= Time.deltaTime;
     }
 
     public void EndGame()
