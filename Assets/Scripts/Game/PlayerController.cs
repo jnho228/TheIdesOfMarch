@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Enemy") || collision.CompareTag("Dagger"))
         {
             OnStabbed();
+            ScreenShake.Instance.ShakeCamera(5f, .5f);
         }
     }
 

@@ -21,7 +21,7 @@ public class GameGUI : MonoBehaviour
 
     private int stabCount = 0;
 
-    void Start()
+    void Awake()
     {
         
     }
