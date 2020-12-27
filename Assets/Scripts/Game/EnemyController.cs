@@ -58,7 +58,6 @@ public class EnemyController : MonoBehaviour
                 dc.SetMoveSpeed(Random.Range(2.5f, 3.5f));
             }
 
-            //FindObjectOfType<AudioManager>().Play("ENEMY_ATTACK");
             audioSource.Play();
             daggerThrowTimer = daggerThrowDelay + Random.Range(-0.3f, 0.3f);
         }
