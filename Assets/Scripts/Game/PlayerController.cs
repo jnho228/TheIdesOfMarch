@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
         gameGUI.AddStab();
         stabCount++;
 
+        //FindObjectOfType<AudioManager>().Play("PLAYER_HIT");
         audioSource.Play();
 
         if (stabCount >= 23)

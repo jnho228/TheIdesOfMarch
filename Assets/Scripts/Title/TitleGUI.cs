@@ -7,6 +7,8 @@ public class TitleGUI : MonoBehaviour
 {
     public Animator screenTransistion;
 
+    public AudioSource uiSelectSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,7 @@ public class TitleGUI : MonoBehaviour
 
     IEnumerator LoadGame()
     {
+        uiSelectSound.Play();
         screenTransistion.SetTrigger("CloseScene");
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(1);

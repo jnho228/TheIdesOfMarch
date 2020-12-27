@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8015396215678957553}
   - component: {fileID: 1956959158068279447}
   - component: {fileID: 331315896476545937}
-  - component: {fileID: 5505036387678933639}
+  - component: {fileID: 5555160042118261378}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -140,7 +140,7 @@ MonoBehaviour:
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 512
---- !u!82 &5505036387678933639
+--- !u!82 &5555160042118261378
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,7 +152,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2e4daddc024d4405ba2be7bdacf33095, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.911
   m_Pitch: 1
   Loop: 0
   Mute: 0

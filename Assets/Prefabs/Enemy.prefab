@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5675790582012314198}
   - component: {fileID: 1110417076266781662}
   - component: {fileID: 7030223648620176041}
-  - component: {fileID: 2822328924142203728}
+  - component: {fileID: 4627765436058776922}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -157,7 +157,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!82 &2822328924142203728
+--- !u!82 &4627765436058776922
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,7 +169,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 231b74e631e2f430c90b7ed8c1c3c0aa, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.926
   m_Pitch: 1
   Loop: 0
   Mute: 0

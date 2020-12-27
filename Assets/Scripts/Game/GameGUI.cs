@@ -14,6 +14,8 @@ public class GameGUI : MonoBehaviour
     public Animator gameOverAnim;
     public TMP_Text gameOverText;
 
+    public AudioSource uiSelectSound;
+
     private float secondTimer = 0f;
     private int minuteTimer = 0;
 
@@ -32,6 +34,7 @@ public class GameGUI : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                uiSelectSound.Play();
                 StartCoroutine(ReturnToTitle());
             }
         }
