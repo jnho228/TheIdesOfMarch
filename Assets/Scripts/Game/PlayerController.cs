@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /* Todo List:
  * [ ] Dash to avoid enemies.
@@ -8,7 +9,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameGUI gameGUI;
+    //public GameGUI gameGUI;
     public float moveSpeed = 5f;
 
     public LayerMask collisionLayerMask;
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
     private int stabCount = 0;
     private bool isAlive = true;
+
+    [SerializeField] private UnityEvent OnPlayerHit, OnPlayerDeath;
 
     void Awake()
     {
@@ -60,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnStabbed()
     {
-        gameGUI.AddStab();
+        OnPlayerHit.Invoke();
         stabCount++;
 
         audioSource.Play();
@@ -71,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     void GameOver()
     {
-        gameGUI.ShowGameOver();
+        OnPlayerDeath.Invoke();
         //pause the spawning
         isAlive = false;
     }
