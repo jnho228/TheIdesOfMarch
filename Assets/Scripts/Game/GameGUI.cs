@@ -17,11 +17,6 @@ public class GameGUI : MonoBehaviour
     private int _minuteTimer = 0;
     private int _stabCount = 0;
 
-    void Awake()
-    {
-        
-    }
-
     void Update()
     {
         UpdateTimer();
