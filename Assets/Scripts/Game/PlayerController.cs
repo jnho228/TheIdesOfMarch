@@ -10,7 +10,7 @@ using UnityEngine.Events;
 public class PlayerController : MonoBehaviour
 {
     public float MoveSpeed = 5f;
-    public LayerMask CollisionLayerMask;
+    public LayerMask MovementCollisionLayerMask;
 
     private Transform _transform;
     private AudioSource _audioSource;
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         Vector2 velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         velocity = velocity.normalized * MoveSpeed;
 
-        RaycastHit2D hit = Physics2D.Raycast(_transform.position, velocity, 0.5f, CollisionLayerMask);
+        RaycastHit2D hit = Physics2D.Raycast(_transform.position, velocity, 0.5f, MovementCollisionLayerMask);
         if (hit)
             velocity = Vector2.zero;
 

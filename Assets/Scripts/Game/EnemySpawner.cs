@@ -96,18 +96,18 @@ public class EnemySpawner : MonoBehaviour
         // Pause everything
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        foreach(GameObject go in enemies)
+        foreach(GameObject i in enemies)
         {
-            EnemyController ec = go.GetComponent<EnemyController>();
-            ec.enabled = false;
+            EnemyController enemyController = i.GetComponent<EnemyController>();
+            enemyController.enabled = false;
         }
 
         GameObject[] daggers = GameObject.FindGameObjectsWithTag("Dagger");
 
-        foreach(GameObject go in daggers)
+        foreach(GameObject i in daggers)
         {
-            DaggerController dc = go.GetComponent<DaggerController>();
-            dc.enabled = false;
+            DaggerController daggerController = i.GetComponent<DaggerController>();
+            daggerController.enabled = false;
         }
     }
 }
