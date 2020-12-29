@@ -5,36 +5,29 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameDifficulty gameDifficulty;
-
     public GameObject enemyObject;
     public GameObject daggerObject;
 
-    private bool isActive = true;
+    private bool IsActive = true;
 
-    private float spawnTimer = 1f;
-    private float spawnDelay = 5f;
-    private float spawnIncreaseTimer = 5f;
-    private float spawnIncreaseDelay = 10f;
-    private int spawnRateLevel = 0;
-
-    private float gameDifficultyIncreaseTimer = 60f;
-    private float gameDifficultyIncreaseDelay = 60f;
-
-    void Start()
-    {
-        
-    }
+    private float _spawnTimer = 1f;
+    private float _spawnDelay = 5f;
+    private float _spawnIncreaseTimer = 5f;
+    private float _spawnIncreaseDelay = 10f;
+    private int _spawnRateLevel = 0;
+    private float _gameDifficultyIncreaseTimer = 60f;
+    private float _gameDifficultyIncreaseDelay = 60f;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) //remove this later
             Application.Quit(-10);
 
-        if (!isActive)
+        if (!IsActive)
             return;
 
         // Timer stuff
-        if (spawnTimer < Time.deltaTime)
+        if (_spawnTimer < Time.deltaTime)
         {
             // Spawn stuff
             // Define a playing area and have mobs spawn on the edge and move randomly in a direction
@@ -68,37 +61,37 @@ public class EnemySpawner : MonoBehaviour
                 newEnemy.SetMoveSpeed(Random.Range(1f, 4f));
             }
 
-            spawnTimer = spawnDelay - (spawnRateLevel * 0.5f);
+            _spawnTimer = _spawnDelay - (_spawnRateLevel * 0.5f);
 
-            if (spawnTimer < 0.2f) // Fuck that let's make it hard
-                spawnTimer = 0.2f;
+            if (_spawnTimer < 0.2f) // Fuck that let's make it hard
+                _spawnTimer = 0.2f;
         }
         else
-            spawnTimer -= Time.deltaTime;
+            _spawnTimer -= Time.deltaTime;
 
         // Difficulty Increase
-        if (spawnIncreaseTimer < Time.deltaTime)
+        if (_spawnIncreaseTimer < Time.deltaTime)
         {
             // I think with each difficulty bump I wanna spawn some sort of super enemy lol
 
-            spawnRateLevel++;
-            spawnIncreaseTimer = spawnIncreaseDelay;
+            _spawnRateLevel++;
+            _spawnIncreaseTimer = _spawnIncreaseDelay;
         }
         else
-            spawnIncreaseTimer -= Time.deltaTime;
+            _spawnIncreaseTimer -= Time.deltaTime;
 
-        if (gameDifficultyIncreaseTimer < Time.deltaTime)
+        if (_gameDifficultyIncreaseTimer < Time.deltaTime)
         {
             gameDifficulty.Difficulty++;
-            gameDifficultyIncreaseTimer = gameDifficultyIncreaseDelay;
+            _gameDifficultyIncreaseTimer = _gameDifficultyIncreaseDelay;
         }
         else
-            gameDifficultyIncreaseTimer -= Time.deltaTime;
+            _gameDifficultyIncreaseTimer -= Time.deltaTime;
     }
 
     public void EndGame()
     {
-        isActive = false;
+        IsActive = false;
 
         // Pause everything
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");

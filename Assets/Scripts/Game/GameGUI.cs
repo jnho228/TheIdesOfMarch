@@ -6,20 +6,16 @@ using TMPro;
 
 public class GameGUI : MonoBehaviour
 {
-    public Animator screenTransistion;
-
     public TMP_Text stabCounterText;
     public TMP_Text timerText;
-
-    public Animator gameOverAnim;
     public TMP_Text gameOverText;
-
+    public Animator screenTransistion;
+    public Animator gameOverAnim;
     public AudioSource uiSelectSound;
 
-    private float secondTimer = 0f;
-    private int minuteTimer = 0;
-
-    private int stabCount = 0;
+    private float _secondTimer = 0f;
+    private int _minuteTimer = 0;
+    private int _stabCount = 0;
 
     void Awake()
     {
@@ -30,7 +26,7 @@ public class GameGUI : MonoBehaviour
     {
         UpdateTimer();
 
-        if (stabCount >= 23)
+        if (_stabCount >= 23)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -42,25 +38,25 @@ public class GameGUI : MonoBehaviour
 
     void UpdateTimer()
     {
-        if (stabCount >= 23)
+        if (_stabCount >= 23)
             return;
 
-        secondTimer += Time.deltaTime;
+        _secondTimer += Time.deltaTime;
 
-        if (secondTimer >= 60)
+        if (_secondTimer >= 60)
         {
-            secondTimer = 0;
-            minuteTimer++;
+            _secondTimer = 0;
+            _minuteTimer++;
         }
 
-        timerText.text = minuteTimer + ":" + secondTimer.ToString("00");
+        timerText.text = _minuteTimer + ":" + _secondTimer.ToString("00");
     }
 
     public void AddStab()
     {
-        stabCount++;
+        _stabCount++;
 
-        stabCounterText.text = "Stabs: " + stabCount;
+        stabCounterText.text = "Stabs: " + _stabCount;
     }
 
     public void ShowGameOver()

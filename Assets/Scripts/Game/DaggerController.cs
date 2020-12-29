@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class DaggerController : MonoBehaviour
 {
-    public float moveSpeed = 0f;
+    public float MoveSpeed = 0f;
 
-    private Transform myTransform;
-    private Animator anim;
+    private Transform _transform;
+    private Animator _animator;
 
     private void Awake()
     {
-        myTransform = transform;
-        anim = GetComponent<Animator>();
+        _transform = transform;
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        myTransform.Translate(Vector2.up * moveSpeed * Time.deltaTime);
+        _transform.Translate(Vector2.up * MoveSpeed * Time.deltaTime);
 
         // Check if we're out of bounds
-        if (myTransform.position.x < -20.5f ||
-            myTransform.position.x > 13.5f ||
-            myTransform.position.y < -11.5f ||
-            myTransform.position.y > 15.5f)
+        if (_transform.position.x < -20.5f ||
+            _transform.position.x > 13.5f ||
+            _transform.position.y < -11.5f ||
+            _transform.position.y > 15.5f)
         {
             StartCoroutine(Despawn());
         }
@@ -31,17 +31,17 @@ public class DaggerController : MonoBehaviour
 
     public void SetMoveAngle(float angle)
     {
-        myTransform.eulerAngles = new Vector3(0, 0, angle);
+        _transform.eulerAngles = new Vector3(0, 0, angle);
     }
 
     public void SetMoveSpeed(float speed)
     {
-        moveSpeed = speed;
+        MoveSpeed = speed;
     }
 
     public void SetPosition(Vector2 position)
     {
-        myTransform.position = position;
+        _transform.position = position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,8 +54,8 @@ public class DaggerController : MonoBehaviour
 
     IEnumerator Despawn()
     {
-        anim.SetTrigger("despawn");
-        moveSpeed = 0;
+        _animator.SetTrigger("despawn");
+        MoveSpeed = 0;
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }

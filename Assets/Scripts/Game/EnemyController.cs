@@ -7,78 +7,75 @@ public class EnemyController : MonoBehaviour
     public GameDifficulty gameDifficulty;
     public GameObject daggerObject;
 
-    private Animator anim;
-    private AudioSource audioSource;
-
-    private float daggerThrowTimer = 1f;
-    private float daggerThrowDelay = 1f;
-
-    private float moveAngle = 0;
-    private float moveSpeed = 0;
-
-    private Transform myTransform;
+    private Transform _transform;
+    private Animator _animator;
+    private AudioSource _audioSource;
+    private float _daggerThrowTimer = 1f;
+    private float _daggerThrowDelay = 1f;
+    private float _moveAngle = 0;
+    private float _moveSpeed = 0;
 
     private void Awake()
     {
-        myTransform = transform;
-        anim = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
+        _transform = transform;
+        _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        daggerThrowTimer = Random.Range(0.5f, 2.5f);
-        daggerThrowDelay = Random.Range(0.5f, 2.5f);
+        _daggerThrowTimer = Random.Range(0.5f, 2.5f);
+        _daggerThrowDelay = Random.Range(0.5f, 2.5f);
     }
 
     void Update()
     {
-        Vector2 movement = new Vector2(Mathf.Sin(moveAngle), Mathf.Cos(moveAngle) * -1);
+        Vector2 movement = new Vector2(Mathf.Sin(_moveAngle), Mathf.Cos(_moveAngle) * -1);
 
-        myTransform.Translate(movement.normalized * moveSpeed * Time.deltaTime);
+        _transform.Translate(movement.normalized * _moveSpeed * Time.deltaTime);
 
         // Check if we're out of bounds
-        if (myTransform.position.x < -20.5f ||
-            myTransform.position.x > 13.5f ||
-            myTransform.position.y < -11.5f ||
-            myTransform.position.y > 15.5f)
+        if (_transform.position.x < -20.5f ||
+            _transform.position.x > 13.5f ||
+            _transform.position.y < -11.5f ||
+            _transform.position.y > 15.5f)
         {
             StartCoroutine(Despawn());
         }
 
         // Dagger spawn timer
-        if (daggerThrowTimer < Time.deltaTime)
+        if (_daggerThrowTimer < Time.deltaTime)
         {
             int spawnAmount = Random.Range(1, gameDifficulty.Difficulty + 1);
 
             for (int i = 0; i < spawnAmount; i++)
             {
-                DaggerController dc = Instantiate(daggerObject, myTransform.position, Quaternion.identity).GetComponent<DaggerController>();
+                DaggerController dc = Instantiate(daggerObject, _transform.position, Quaternion.identity).GetComponent<DaggerController>();
                 dc.SetMoveAngle(Random.Range(0, 360));
                 dc.SetMoveSpeed(Random.Range(2.5f, 3.5f));
             }
 
-            audioSource.Play();
-            daggerThrowTimer = daggerThrowDelay + Random.Range(-0.3f, 0.3f);
+            _audioSource.Play();
+            _daggerThrowTimer = _daggerThrowDelay + Random.Range(-0.3f, 0.3f);
         }
         else
-            daggerThrowTimer -= Time.deltaTime;
+            _daggerThrowTimer -= Time.deltaTime;
 
     }
 
     public void SetMoveAngle(float angle)
     {
-        moveAngle = angle * Mathf.Deg2Rad;
+        _moveAngle = angle * Mathf.Deg2Rad;
     }
 
     public void SetMoveSpeed(float speed)
     {
-        moveSpeed = speed;
+        _moveSpeed = speed;
     }
 
     public void SetPosition(Vector2 position)
     {
-        myTransform.position = position;
+        _transform.position = position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -91,8 +88,8 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator Despawn()
     {
-        moveSpeed = 0;
-        anim.SetTrigger("despawn");
+        _moveSpeed = 0;
+        _animator.SetTrigger("despawn");
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }

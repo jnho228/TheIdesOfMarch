@@ -9,27 +9,25 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    //public GameGUI gameGUI;
-    public float moveSpeed = 5f;
+    public float MoveSpeed = 5f;
+    public LayerMask CollisionLayerMask;
 
-    public LayerMask collisionLayerMask;
-
-    private Transform myTransform;
-    private AudioSource audioSource;
-    private int stabCount = 0;
-    private bool isAlive = true;
+    private Transform _transform;
+    private AudioSource _audioSource;
+    private int StabCount = 0;
+    private bool IsAlive => StabCount < 23;
 
     [SerializeField] private UnityEvent OnPlayerHit, OnPlayerDeath;
 
     void Awake()
     {
-        myTransform = transform;
-        audioSource = GetComponent<AudioSource>();
+        _transform = transform;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        if (!isAlive)
+        if (!IsAlive)
             return;
 
         Movement();
@@ -38,18 +36,16 @@ public class PlayerController : MonoBehaviour
     void Movement()
     {
         Vector2 velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        velocity = velocity.normalized * MoveSpeed;
 
-        velocity = velocity.normalized * moveSpeed;
-
-        RaycastHit2D hit = Physics2D.Raycast(myTransform.position, velocity, 0.5f, collisionLayerMask);
-
+        RaycastHit2D hit = Physics2D.Raycast(_transform.position, velocity, 0.5f, CollisionLayerMask);
         if (hit)
             velocity = Vector2.zero;
 
-        myTransform.Translate(velocity * Time.deltaTime);
+        _transform.Translate(velocity * Time.deltaTime);
 
         //Keep me locked in between x: -19.5 and 12.5 / y: 14.5 and -10.5
-        myTransform.position = new Vector2(Mathf.Clamp(myTransform.position.x, -19.5f, 12.5f), Mathf.Clamp(myTransform.position.y, -10.5f, 14.5f));
+        _transform.position = new Vector2(Mathf.Clamp(_transform.position.x, -19.5f, 12.5f), Mathf.Clamp(_transform.position.y, -10.5f, 14.5f));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -64,18 +60,11 @@ public class PlayerController : MonoBehaviour
     private void OnStabbed()
     {
         OnPlayerHit.Invoke();
-        stabCount++;
+        StabCount++;
 
-        audioSource.Play();
+        _audioSource.Play();
 
-        if (stabCount >= 23)
-            GameOver();
-    }
-
-    void GameOver()
-    {
-        OnPlayerDeath.Invoke();
-        //pause the spawning
-        isAlive = false;
+        if (StabCount >= 23)
+            OnPlayerDeath.Invoke();
     }
 }
