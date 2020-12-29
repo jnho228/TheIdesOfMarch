@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour
     private float _daggerThrowDelay = 1f;
     private float _moveAngle = 0;
     private float _moveSpeed = 0;
-    private float _attackTimer = 1f;
+    private float _attackTimer = 0f;
     private readonly float _attackDelay = 1f;
 
     private void Awake()

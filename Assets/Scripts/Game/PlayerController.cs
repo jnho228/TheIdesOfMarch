@@ -13,17 +13,17 @@ public class PlayerController : MonoBehaviour
     public float MoveSpeed = 5f;
     public LayerMask MovementCollisionLayerMask;
 
-    private bool IsAlive => StabCount < 23;
-    private int StabCount = 0;
-    private bool IsStunned = false;
+    private bool IsAlive => _stabCount < 23;
+    private bool IsStunned => _stunTimer > 0;
 
     private Transform _transform;
     private AudioSource _audioSource;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private CapsuleCollider2D _capsuleCollider2D;
-    private float _stunTimer = 0.5f;
+    private float _stunTimer = 0f;
     private readonly float _stunTimerDelay = 0.5f;
+    private int _stabCount = 0;
 
     [SerializeField] private UnityEvent OnPlayerHit, OnPlayerDeath;
 
@@ -44,10 +44,6 @@ public class PlayerController : MonoBehaviour
         if (IsStunned)
         {
             _stunTimer -= Time.deltaTime;
-
-            if (_stunTimer < Time.deltaTime)
-                IsStunned = false;
-            
             return;
         }
 
@@ -89,7 +85,7 @@ public class PlayerController : MonoBehaviour
     private void GetStabbed()
     {
         OnPlayerHit.Invoke();
-        StabCount++;
+        _stabCount++;
 
         _audioSource.Play();
         _animator.Play("Hit");
@@ -102,9 +98,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             // Stun the player.
-            IsStunned = true;
             _stunTimer = _stunTimerDelay;
-
         }
     }
 }
