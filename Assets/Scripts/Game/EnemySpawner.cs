@@ -11,12 +11,16 @@ public class EnemySpawner : MonoBehaviour
     private bool IsActive = true;
 
     private float _spawnTimer = 1f;
-    private float _spawnDelay = 5f;
+    private readonly float _spawnDelay = 5f;
     private float _spawnIncreaseTimer = 5f;
-    private float _spawnIncreaseDelay = 10f;
+    private readonly float _spawnIncreaseDelay = 10f;
     private int _spawnRateLevel = 0;
     private float _gameDifficultyIncreaseTimer = 60f;
-    private float _gameDifficultyIncreaseDelay = 60f;
+    private readonly float _gameDifficultyIncreaseDelay = 60f;
+
+    private const float MIN_MOVE_SPEED = 1f;
+    private const float MAX_MOVE_SPEED = 4f;
+    private const float SPAWN_ANGLE_VARIATION = 15f;
 
     void Update()
     {
@@ -39,26 +43,26 @@ public class EnemySpawner : MonoBehaviour
             if (randomSide == 0) //left
             {
                 newEnemy.SetPosition(new Vector2(-20.5f, Random.Range(-10.5f, 14.5f)));
-                newEnemy.SetMoveAngle(90 + Random.Range(-15f, 15f));
-                newEnemy.SetMoveSpeed(Random.Range(1f, 4f));
+                newEnemy.SetMoveAngle(90 + Random.Range(-SPAWN_ANGLE_VARIATION, SPAWN_ANGLE_VARIATION));
+                newEnemy.SetMoveSpeed(Random.Range(MIN_MOVE_SPEED, MAX_MOVE_SPEED));
             }
             if (randomSide == 1) //top
             {
                 newEnemy.SetPosition(new Vector2(Random.Range(-19.5f, 12.5f), 15.5f));
-                newEnemy.SetMoveAngle(Random.Range(-15f, 15f));
-                newEnemy.SetMoveSpeed(Random.Range(1f, 4f));
+                newEnemy.SetMoveAngle(Random.Range(-SPAWN_ANGLE_VARIATION, SPAWN_ANGLE_VARIATION));
+                newEnemy.SetMoveSpeed(Random.Range(MIN_MOVE_SPEED, MAX_MOVE_SPEED));
             }
             if (randomSide == 2) //right
             {
                 newEnemy.SetPosition(new Vector2(13.5f, Random.Range(-10.5f, 14.5f)));
-                newEnemy.SetMoveAngle(-90 + Random.Range(-15f, 15f));
-                newEnemy.SetMoveSpeed(Random.Range(1f, 4f));
+                newEnemy.SetMoveAngle(-90 + Random.Range(-SPAWN_ANGLE_VARIATION, SPAWN_ANGLE_VARIATION));
+                newEnemy.SetMoveSpeed(Random.Range(MIN_MOVE_SPEED, MAX_MOVE_SPEED));
             }
             if (randomSide == 3) //bottom
             {
                 newEnemy.SetPosition(new Vector2(Random.Range(-19.5f, 12.5f), -11.5f));
-                newEnemy.SetMoveAngle(180 + Random.Range(-15f, 15f));
-                newEnemy.SetMoveSpeed(Random.Range(1f, 4f));
+                newEnemy.SetMoveAngle(180 + Random.Range(-SPAWN_ANGLE_VARIATION, SPAWN_ANGLE_VARIATION));
+                newEnemy.SetMoveSpeed(Random.Range(MIN_MOVE_SPEED, MAX_MOVE_SPEED));
             }
 
             _spawnTimer = _spawnDelay - (_spawnRateLevel * 0.5f);

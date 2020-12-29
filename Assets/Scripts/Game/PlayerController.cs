@@ -12,10 +12,11 @@ public class PlayerController : MonoBehaviour
     public float MoveSpeed = 5f;
     public LayerMask MovementCollisionLayerMask;
 
+    private bool IsAlive => StabCount < 23;
+    private int StabCount = 0;
+
     private Transform _transform;
     private AudioSource _audioSource;
-    private int StabCount = 0;
-    private bool IsAlive => StabCount < 23;
 
     [SerializeField] private UnityEvent OnPlayerHit, OnPlayerDeath;
 
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Enemy") || collision.CompareTag("Dagger"))
         {
             OnStabbed();
-            ScreenShake.Instance.ShakeCamera(5f, .5f);
+            ScreenShake.Instance.ShakeCamera(5.5f, .4f);
         }
     }
 
@@ -64,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
         _audioSource.Play();
 
-        if (StabCount >= 23)
+        if (!IsAlive)
             OnPlayerDeath.Invoke();
     }
 }
