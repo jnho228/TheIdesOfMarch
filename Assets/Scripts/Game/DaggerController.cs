@@ -59,4 +59,9 @@ public class DaggerController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
+
+    private void OnDisable() // Just test if this works?
+    {
+        _animator.enabled = false;
+    }
 }

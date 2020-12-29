@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    private const float MIN_MOVE_SPEED = 1f;
+    private const float MAX_MOVE_SPEED = 4f;
+    private const float SPAWN_ANGLE_VARIATION = 15f;
+
     public GameDifficulty gameDifficulty;
     public GameObject enemyObject;
     public GameObject daggerObject;
@@ -17,10 +21,6 @@ public class EnemySpawner : MonoBehaviour
     private int _spawnRateLevel = 0;
     private float _gameDifficultyIncreaseTimer = 60f;
     private readonly float _gameDifficultyIncreaseDelay = 60f;
-
-    private const float MIN_MOVE_SPEED = 1f;
-    private const float MAX_MOVE_SPEED = 4f;
-    private const float SPAWN_ANGLE_VARIATION = 15f;
 
     void Update()
     {
