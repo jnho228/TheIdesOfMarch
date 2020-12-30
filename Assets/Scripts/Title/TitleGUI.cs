@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TitleGUI : MonoBehaviour
 {
+    public Animator canvasAnimator;
     public Animator screenTransistion;
     public AudioSource uiSelectSound;
 
@@ -29,6 +30,7 @@ public class TitleGUI : MonoBehaviour
 
     IEnumerator LoadGame()
     {
+        canvasAnimator.SetTrigger("startGame");
         uiSelectSound.Play();
         screenTransistion.SetTrigger("CloseScene");
         yield return new WaitForSeconds(1);

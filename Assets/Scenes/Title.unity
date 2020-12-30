@@ -890,6 +890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb9df9241df240758fed73719437d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasAnimator: {fileID: 1519069386}
   screenTransistion: {fileID: 97884912}
   uiSelectSound: {fileID: 1519069387}
 --- !u!95 &1519069386

@@ -9,6 +9,7 @@ public class TutorialGUI : MonoBehaviour
     public Animator screenTransistion;
 
     private AudioSource _audioSource;
+    private float _autoLoadLevelTimer = 5f;
 
     private void Awake()
     {
@@ -17,7 +18,9 @@ public class TutorialGUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        _autoLoadLevelTimer -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space) || _autoLoadLevelTimer < 0)
         {
             StartCoroutine(LoadLevel());
         }

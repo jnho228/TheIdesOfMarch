@@ -68,7 +68,9 @@ public class EnemyController : MonoBehaviour
         // Dagger spawn timer
         if (_daggerThrowTimer < Time.deltaTime)
         {
-            int spawnAmount = Random.Range(1, gameDifficulty.Difficulty + 1);
+            // IDK, just 1 to difficulty lvl made the expansion too much
+            // maybe this works?
+            int spawnAmount = Random.Range(1, Random.Range(1, gameDifficulty.Difficulty + 1));
 
             for (int i = 0; i < spawnAmount; i++)
             {
@@ -78,7 +80,7 @@ public class EnemyController : MonoBehaviour
             }
 
             _enemyAttackAudioSource.Play();
-            _daggerThrowTimer = _daggerThrowDelay + Random.Range(-0.3f, 0.3f);
+            _daggerThrowTimer = _daggerThrowDelay + Random.Range(-0.5f, 0.5f);
         }
         else
             _daggerThrowTimer -= Time.deltaTime;

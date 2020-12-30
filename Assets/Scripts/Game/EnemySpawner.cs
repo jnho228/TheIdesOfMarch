@@ -67,8 +67,8 @@ public class EnemySpawner : MonoBehaviour
 
             _spawnTimer = _spawnDelay - (_spawnRateLevel * 0.5f);
 
-            if (_spawnTimer < 0.2f) // Fuck that let's make it hard
-                _spawnTimer = 0.2f;
+            if (_spawnTimer < 0.5f)
+                _spawnTimer = 0.5f;
         }
         else
             _spawnTimer -= Time.deltaTime;
