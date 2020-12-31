@@ -9,6 +9,8 @@ public class TitleGUI : MonoBehaviour
     public Animator screenTransistion;
     public AudioSource uiSelectSound;
 
+    private bool _isLoadingLevel = false;
+
     void Start()
     {
         Cursor.visible = false;
@@ -16,6 +18,9 @@ public class TitleGUI : MonoBehaviour
 
     void Update()
     {
+        if (_isLoadingLevel)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(LoadGame());
@@ -30,6 +35,7 @@ public class TitleGUI : MonoBehaviour
 
     IEnumerator LoadGame()
     {
+        _isLoadingLevel = true;
         canvasAnimator.SetTrigger("startGame");
         uiSelectSound.Play();
         screenTransistion.SetTrigger("CloseScene");

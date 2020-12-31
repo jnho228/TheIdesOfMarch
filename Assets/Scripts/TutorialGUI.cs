@@ -10,6 +10,7 @@ public class TutorialGUI : MonoBehaviour
 
     private AudioSource _audioSource;
     private float _autoLoadLevelTimer = 5f;
+    private bool _isLoadingLevel = false;
 
     private void Awake()
     {
@@ -18,6 +19,9 @@ public class TutorialGUI : MonoBehaviour
 
     private void Update()
     {
+        if (_isLoadingLevel)
+            return;
+
         _autoLoadLevelTimer -= Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Space) || _autoLoadLevelTimer < 0)
@@ -28,6 +32,7 @@ public class TutorialGUI : MonoBehaviour
 
     IEnumerator LoadLevel()
     {
+        _isLoadingLevel = true;
         _audioSource.Play();
         screenTransistion.Play("Scene Close");
         yield return new WaitForSeconds(1f);
