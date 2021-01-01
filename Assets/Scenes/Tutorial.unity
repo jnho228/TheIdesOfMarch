@@ -495,7 +495,7 @@ MonoBehaviour:
 
 
     Use the arrow
-    keys to avoid everyone!'
+    keys to avoid the assassins!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9bdb95ef2540c489eb05b30a9679bd44, type: 2}
   m_sharedMaterial: {fileID: -3934827972643045700, guid: 9bdb95ef2540c489eb05b30a9679bd44, type: 2}

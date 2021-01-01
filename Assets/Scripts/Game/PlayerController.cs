@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Experimental.Rendering.Universal;
 
 /* Todo List:
  * [ ] Dash to avoid enemies.
@@ -11,6 +12,7 @@ using UnityEngine.Events;
 public class PlayerController : MonoBehaviour
 {
     public float MoveSpeed = 5f;
+    public Light2D light2D;
     public LayerMask MovementCollisionLayerMask;
 
     private bool IsAlive => _stabCount < 23;
@@ -46,6 +48,9 @@ public class PlayerController : MonoBehaviour
             _stunTimer -= Time.deltaTime;
             return;
         }
+
+        // Make the light intensity grow and shrink
+        light2D.intensity = (0.15f * Mathf.Sin(Time.time * 1.5f)) + 0.85f;
 
         Movement();
     }
