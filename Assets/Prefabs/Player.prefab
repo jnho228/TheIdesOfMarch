@@ -122,8 +122,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02158867, y: -0.0002636777}
-  m_Size: {x: 0.07675352, y: 0.1354203}
+  m_Offset: {x: -0.00020645725, y: -0.014658345}
+  m_Size: {x: 0.05074013, y: 0.11188441}
   m_Direction: 0
 --- !u!114 &331315896476545937
 MonoBehaviour:
@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 5
+  light2D: {fileID: 0}
   MovementCollisionLayerMask:
     serializedVersion: 2
     m_Bits: 512
