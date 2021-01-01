@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     public GameObject daggerObject;
 
     private bool IsAttacking => _attackTimer > 0;
+    private bool IsSpawningOrDespawning => _spawnOrDespawnTimer > 0;
 
     private Transform _transform;
     private Animator _animator;
@@ -23,6 +24,8 @@ public class EnemyController : MonoBehaviour
     private float _moveSpeed = 0;
     private float _attackTimer = 0f;
     private readonly float _attackDelay = 1f;
+    private float _spawnOrDespawnTimer = 1f;
+    private readonly float _spawnOrDespawnDelay = 1f;
 
     private void Awake()
     {
@@ -36,10 +39,18 @@ public class EnemyController : MonoBehaviour
     {
         _daggerThrowTimer = Random.Range(0.5f, 2.5f);
         _daggerThrowDelay = Random.Range(0.5f, 2.5f);
+
+        _animator.Play("spawn");
     }
 
     void Update()
     {
+        if (IsSpawningOrDespawning)
+        {
+            _spawnOrDespawnTimer -= Time.deltaTime;
+            return;
+        }
+
         if (IsAttacking)
         {
             _attackTimer -= Time.deltaTime;
@@ -120,7 +131,8 @@ public class EnemyController : MonoBehaviour
     IEnumerator Despawn()
     {
         _moveSpeed = 0;
-        _animator.SetTrigger("despawn");
+        _animator.Play("despawn");
+        _spawnOrDespawnTimer = _spawnOrDespawnDelay;
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }

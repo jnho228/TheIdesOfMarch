@@ -533,7 +533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: (c) 2020 Nick H. (jnho228)
+  m_text: (c) 2021 Nick H. (jnho228)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9bdb95ef2540c489eb05b30a9679bd44, type: 2}
   m_sharedMaterial: {fileID: -3934827972643045700, guid: 9bdb95ef2540c489eb05b30a9679bd44, type: 2}
@@ -657,7 +657,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1014.7, y: 92.9995}
+  m_AnchoredPosition: {x: -1014.6992, y: 92.99902}
   m_SizeDelta: {x: 2007.876, y: 185.999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1405527786
@@ -680,7 +680,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ver 1.0
+  m_text: ver 1.1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9bdb95ef2540c489eb05b30a9679bd44, type: 2}
   m_sharedMaterial: {fileID: -3934827972643045700, guid: 9bdb95ef2540c489eb05b30a9679bd44, type: 2}
