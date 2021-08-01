@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Screenshotter : MonoBehaviour
 {
+#if UNITY_EDITOR
     private void Update()
     {
         // For debug use only, so check if it's the editor or not.
@@ -16,4 +17,5 @@ public class Screenshotter : MonoBehaviour
             Debug.Log("Saving " + fileName);
         }
     }
+#endif
 }

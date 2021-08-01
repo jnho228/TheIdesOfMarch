@@ -24,8 +24,10 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Escape)) //remove this later
             Application.Quit(-10);
+        */
 
         if (!IsActive)
             return;
