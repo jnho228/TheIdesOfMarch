@@ -29,6 +29,14 @@ public class GameGUI : MonoBehaviour
                 StartCoroutine(ReturnToTitle());
             }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                uiSelectSound.Play();
+                StartCoroutine(ReturnToTitle());
+            }
+        }
     }
 
     void UpdateTimer()
